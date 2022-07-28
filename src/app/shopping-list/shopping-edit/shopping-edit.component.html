@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="col-xs-12">
+        <form>
+            <div class="row">
+                <div class="col-sm-5 form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" required autocomplete="off"
+                        placeholder="Enter Name of Ingredient" #nameInput>
+                    <!-- <label class="text-danger">Enter Ingredient Name</label> -->
+                </div>
+                <div class="col-sm-2 form-group">
+                    <label for="amount">Amount</label>
+                    <input type="number" id="amount" required class="form-control" placeholder="number" #amountInput>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button class="btn btn-success m-1" type="submit" (click)="onAddItem()">Add</button>
+                    <!-- adding delete function -->
+                    <button class="btn btn-danger m-1" type="submit">Delete</button>
+                    <!-- <button class="btn btn-danger m-1" type="submit" >Delete</button> -->
+                    <button class="btn btn-primary m-1" type="submit">Clear</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
