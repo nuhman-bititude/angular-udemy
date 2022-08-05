@@ -19,7 +19,7 @@
                         type="submit" [disabled]="!form.valid">{{editMode?"Update":"Add"}}</button>
                     <button class="btn btn-danger m-1" style="margin-left: 5px;" type="button" (click)="onDelete()"
                         *ngIf="editMode">Delete</button>
-                    <button class="btn btn-primary m-1" style="margin-left: 5px;" type="button"
+                    <button class="btn btn-primary m-1" style="margin-left: 5px;" type="button" [disabled]="!form.dirty"
                         (click)="onClearForm()">Clear</button>
                 </div>
             </div>

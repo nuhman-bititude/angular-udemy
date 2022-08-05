@@ -1,4 +1,3 @@
-import { ShoppingListComponent } from './../shopping-list.component';
 import { ShoppingListService } from './../shopping-list.service';
 import { Ingredient } from './../../shared/ingredient';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
@@ -39,7 +38,6 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 
   onSubmit(form: NgForm) {
     const newIngredient = new Ingredient(form.value.name, form.value.amount);
-    console.log(form);
     if (this.editMode) {
       this.shoppingListService.updateIngredient(
         this.editedItemIndex,
