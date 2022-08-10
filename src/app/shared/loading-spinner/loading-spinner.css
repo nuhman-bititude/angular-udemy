@@ -1,0 +1,21 @@
+.spinner {
+  width: 40px;
+  height: 40px;
+  top: calc(50% - 20px);
+  left: calc(50% - 20px);
+  background-color: #fff;
+  margin: auto;
+  border-radius: 50%;
+  border: 6px solid #ccc;
+  border-top: 6px solid #009cff;
+  animation: sp-anime 0.9s infinite linear;
+}
+
+@keyframes sp-anime {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

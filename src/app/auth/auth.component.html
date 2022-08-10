@@ -1,0 +1,28 @@
+<div class="login">
+    <div class="account-login">
+
+        <h1>{{isLogin?"Account Login":"Create new Account"}}</h1>
+
+        <form class="login-form" #form="ngForm" (ngSubmit)="onSubmit(form)">
+
+            <div class="form-group">
+                <input type="email" placeholder="Email" class="form-control" ngModel name="email" required email>
+            </div>
+            <div class="form-group">
+                <input type="password" placeholder="Password" class="form-control" ngModel name="password" required
+                    minlength="8">
+            </div>
+            <button class="btn" type="submit" [disabled]="!form.valid">{{isLogin?"Login":"Sign Up"}}</button>
+            <div class="spinner" *ngIf="isLoading">
+                <app-loading-spinner></app-loading-spinner>
+            </div>
+            <div class="alert alert-danger p3" *ngIf="error">
+
+                {{ error }}
+            </div>
+
+            <p>{{isLogin?"Are you new here?":"Already Have an Account??"}}<a class="signup-link"
+                    (click)="onSwitchMode()">{{isLogin?"Sign Up":"Login"}}</a></p>
+        </form>
+    </div>
+</div>
