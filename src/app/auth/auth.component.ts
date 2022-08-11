@@ -34,7 +34,7 @@ export class AuthComponent {
 
     authObseravable.subscribe(
       (responce) => {
-        console.log(responce);
+        // console.log(responce);
         this.router.navigate(['/recipes']);
         this.isLoading = false;
         form.reset();
@@ -44,5 +44,8 @@ export class AuthComponent {
         this.isLoading = false;
       }
     );
+  }
+  onHandleError() {
+    this.error = null;
   }
 }

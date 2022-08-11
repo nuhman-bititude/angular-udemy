@@ -16,10 +16,11 @@
             <div class="spinner" *ngIf="isLoading">
                 <app-loading-spinner></app-loading-spinner>
             </div>
-            <div class="alert alert-danger p3" *ngIf="error">
+            <!-- <div class="alert alert-danger p3" *ngIf="error">
 
                 {{ error }}
-            </div>
+            </div> -->
+            <app-alert [message]="error" *ngIf="error" (close)="onHandleError()"></app-alert>
 
             <p>{{isLogin?"Are you new here?":"Already Have an Account??"}}<a class="signup-link"
                     (click)="onSwitchMode()">{{isLogin?"Sign Up":"Login"}}</a></p>

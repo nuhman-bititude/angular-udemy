@@ -8,7 +8,9 @@ export class userModel {
 
   get token() {
     if (!this._tokenExpirationDate || new Date() > this._tokenExpirationDate) {
+      //FIXME:
       return null;
+      // return this._token;
     }
     return this._token;
   }
