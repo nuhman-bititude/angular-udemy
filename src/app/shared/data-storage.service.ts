@@ -16,9 +16,7 @@ export class DataStorageService {
         'https://recipe-book-10-default-rtdb.firebaseio.com/recipes.json',
         recipes
       )
-      .subscribe((response) => {
-        console.log(response);
-      });
+      .subscribe();
   }
 
   fetchRecipes() {

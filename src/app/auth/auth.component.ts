@@ -1,5 +1,5 @@
 import { AuthService, AuthResponceData } from './auth.service';
-import { Component } from '@angular/core';
+import { Component, ComponentFactoryResolver } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -10,7 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private componentFactoryResolver: ComponentFactoryResolver
+  ) {}
 
   isLogin: boolean = true;
   isLoading: boolean = false;
@@ -41,6 +45,7 @@ export class AuthComponent {
       },
       (errorMessage) => {
         this.error = errorMessage;
+        this.showErrorAlert(errorMessage);
         this.isLoading = false;
       }
     );
@@ -48,4 +53,5 @@ export class AuthComponent {
   onHandleError() {
     this.error = null;
   }
+  private showErrorAlert(message: string) {}
 }
