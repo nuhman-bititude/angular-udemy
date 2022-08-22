@@ -1,26 +1,14 @@
+import * as ShoppingListActions from './../shopping-list/store/shopping-list.actions';
+import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
-import { ShoppingListService } from './../shopping-list/shopping-list.service';
 import { Ingredient } from './../shared/ingredient';
 import { Injectable } from '@angular/core';
 import { Recipe } from './recipe.model';
+import * as fromApp from '../store/app.reducer';
 @Injectable()
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
-  // private recipes: Recipe[] = [
-  //   new Recipe(
-  //     'Butter Egg Plant',
-  //     'Curry recipe',
-  //     'https://img.delicious.com.au/5aLcV7cG/del/2021/05/slow-roasted-butter-eggplant-curry-152139-2.jpg',
-  //     [new Ingredient('Chicken', 5), new Ingredient('Butter', 2)]
-  //   ),
-  //   new Recipe(
-  //     'Chicken',
-  //     'Chicekn Gravy',
-  //     'https://img.delicious.com.au/Iok992Gi/w759-h506-cfill/del/2022/02/chicken-chickpea-curry-163942-1.jpg',
-  //     [new Ingredient('Chicken', 2), new Ingredient('Peanut', 2)]
-  //   ),
-  // ];
-  constructor(private shoppingListService: ShoppingListService) {}
+  constructor(private store: Store<fromApp.AppState>) {}
   private recipes: Recipe[] = [];
   getRecipes() {
     return this.recipes.slice();
@@ -31,7 +19,8 @@ export class RecipeService {
   }
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
-    this.shoppingListService.addIngredients(ingredients);
+    // this.shoppingListService.addIngredients(ingredients); FIXME: No longer needed since store is used
+    this.store.dispatch(new ShoppingListActions.AddIngredients(ingredients));
   }
   addRecipe(recipe: Recipe) {
     console.log(recipe);

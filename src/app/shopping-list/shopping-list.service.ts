@@ -1,8 +1,9 @@
 import { Subject } from 'rxjs';
 import { Ingredient } from './../shared/ingredient';
 export class ShoppingListService {
+  // constructor(private) {}
   startedEditing = new Subject<number>();
-  ingredients: Ingredient[] = [
+  private ingredients: Ingredient[] = [
     new Ingredient('Apple', 50),
     new Ingredient('Banana', 12),
   ];

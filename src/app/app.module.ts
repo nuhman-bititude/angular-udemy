@@ -9,6 +9,9 @@ import { HeaderComponent } from './header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
+import { StoreModule } from '@ngrx/store';
+
+import * as fromApp from './store/app.reducer';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, PageNotFoundComponent],
@@ -18,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-
+    StoreModule.forRoot(fromApp.appReducer),
     SharedModule,
     CoreModule,
   ],
