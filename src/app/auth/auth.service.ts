@@ -83,7 +83,7 @@ export class AuthService {
       // checking if user have valid token
       // this.user.next(loadedUser);
       this.store.dispatch(
-        new AuthActions.Login({
+        new AuthActions.AuthenticateSuccess({
           email: loadedUser.email,
           token: loadedUser.token,
           userId: loadedUser.id,
@@ -132,7 +132,12 @@ export class AuthService {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new userModel(email, userId, token, expirationDate);
     this.store.dispatch(
-      new AuthActions.Login({ email, userId, token, expirationDate })
+      new AuthActions.AuthenticateSuccess({
+        email,
+        userId,
+        token,
+        expirationDate,
+      })
     );
     this.autoLogout(expiresIn * 1000);
     localStorage.setItem('userData', JSON.stringify(user));

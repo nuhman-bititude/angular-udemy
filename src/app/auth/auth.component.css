@@ -3,7 +3,7 @@
   padding: 0px;
 }
 .login {
-  background: linear-gradient(to bottom, #0099ff 0%, #fff 100%);
+  background: linear-gradient(to bottom, #1b85ef 0%, rgb(201, 181, 181) 100%);
   height: 100vh;
   width: 100%;
   justify-content: center;

@@ -1,4 +1,3 @@
-import * as AuthActions from './store/auth.actions';
 import * as fromApp from '../store/app.reducer';
 import { Store } from '@ngrx/store';
 

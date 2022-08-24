@@ -66,7 +66,7 @@ export function shoppingListReducer(
       return {
         ...state,
         editedIngredient: null,
-        editedUngredientIndex: -1,
+        editedIngredientIndex: -1,
       };
     }
 

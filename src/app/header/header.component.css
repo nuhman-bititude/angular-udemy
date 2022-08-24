@@ -1,0 +1,32 @@
+.navbar-brand {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 0%;
+}
+.brand-icon {
+  height: 50px;
+  width: 50px;
+}
+.navbar-nav {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.nav-link {
+  color: rgb(0, 0, 0);
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+.nav-link:hover {
+  color: #fff;
+}
+.nav-link:active {
+  color: rgb(242, 10, 10);
+}
+.nav-link:focus {
+  color: rgb(82, 58, 57);
+}
+.nav-link:visited {
+  color: rgb(0, 0, 0);
+}
