@@ -1,4 +1,7 @@
-<div class="login">
+<div class="spinner" style="text-align: center;" *ngIf="isLoading">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="login" *ngIf="!isLoading">
     <div class="account-login">
 
         <h1>{{isLogin?"Account Login":"Create new Account"}}</h1>
@@ -13,14 +16,13 @@
                     minlength="8">
             </div>
             <button class="btn" type="submit" [disabled]="!form.valid">{{isLogin?"Login":"Sign Up"}}</button>
-            <div class="spinner" *ngIf="isLoading">
-                <app-loading-spinner></app-loading-spinner>
+            <div class="alert alert-danger p-3" *ngIf="error"
+                style="width: 100%;height: 50px;text-align: center;justify-content: center;margin-top:auto;margin-bottom: auto;">
+                <p class="error-text">{{ error }}</p>
             </div>
-            <!-- <div class="alert alert-danger p3" *ngIf="error">
-
-                {{ error }}
-            </div> -->
-            <app-alert [message]="error" *ngIf="error" (close)="onHandleError()"></app-alert>
+            <div>
+                <app-alert [message]="error" *ngIf="error" (close)="onHandleError()"></app-alert>
+            </div>
 
             <p>{{isLogin?"Are you new here?":"Already Have an Account??"}}<a class="signup-link"
                     (click)="onSwitchMode()">{{isLogin?"Sign Up":"Login"}}</a></p>

@@ -38,15 +38,10 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   onSubmit(form: NgForm) {
     const newIngredient = new Ingredient(form.value.name, form.value.amount);
     if (this.editMode) {
-      // this.shoppingListService.updateIngredient(
-      //   this.editedItemIndex,
-      //   newIngredient
-      // );
       this.store.dispatch(
         new ShoppingListActions.UpdateIngredient(newIngredient)
       );
     } else {
-      // this.shoppingListService.addIngredient(newIngredient); FIXME: No longer needed , since not setting ingredient using Service. Ingredient is set thorugh Store .
       this.store.dispatch(new ShoppingListActions.AddIngredient(newIngredient));
     }
     form.reset();
@@ -58,7 +53,6 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     this.shoppingListForm.reset();
   }
   onDelete() {
-    // this.shoppingListService.deleteIngredient(this.editedItemIndex);
     this.store.dispatch(new ShoppingListActions.DeleteIngredient());
     this.onClearForm();
   }

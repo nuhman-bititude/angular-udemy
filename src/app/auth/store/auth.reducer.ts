@@ -54,6 +54,12 @@ export function authReducer(
         user: null,
       };
     }
+    case AuthActions.HANDLE_ERROR: {
+      return {
+        ...state,
+        authError: null,
+      };
+    }
     default:
       return state;
   }

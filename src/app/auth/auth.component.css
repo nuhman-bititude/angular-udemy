@@ -85,3 +85,10 @@ p {
   text-decoration: none;
   cursor: pointer;
 }
+
+.error-text {
+  margin-top: 12px;
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: bold;
+}

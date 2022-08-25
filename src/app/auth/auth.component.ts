@@ -4,7 +4,7 @@ import { NgForm } from '@angular/forms';
 
 import * as fromApp from '../store/app.reducer';
 import * as AuthActions from './store/auth.actions';
-import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
@@ -13,25 +13,16 @@ import { Subscription } from 'rxjs';
 export class AuthComponent implements OnInit, OnDestroy {
   constructor(private store: Store<fromApp.AppState>) {}
 
-  private storeSub = Subscription;
   ngOnInit() {
-    //FIXME: (Type 'Subscription' is missing the following properties from type 'typeof Subscription': prototype, EMPTYts(2739)) this.storeSub =
     this.store.select('auth').subscribe((authState) => {
-      console.log(authState);
       this.isLoading = authState.loading;
       this.error = authState.authError;
-      console.log(this.error);
       if (this.error) {
         this.showErrorAlert(this.error);
       }
     });
   }
-  ngOnDestroy() {
-    if (this.storeSub) {
-      console.log(this.storeSub);
-      // this.storeSub.unSubscribe();
-    }
-  }
+  ngOnDestroy() {}
   isLogin: boolean = true;
   isLoading: boolean = false;
   error: string = null;
@@ -52,7 +43,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     form.reset();
   }
   onHandleError() {
-    this.error = null;
+    this.store.dispatch(new AuthActions.HandleError());
   }
   private showErrorAlert(message: string) {}
 }

@@ -1,3 +1,5 @@
+import { AuthService } from './../auth.service';
+import { userModel } from './../user.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -13,11 +15,14 @@ const handleAuthentication = (
   token: string
 ) => {
   const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+  const user = new userModel(email, userId, token, expirationDate);
+  localStorage.setItem('userData', JSON.stringify(user));
   return new AuthActions.AuthenticateSuccess({
     email,
     userId,
     token,
     expirationDate,
+    redirect: true,
   });
 };
 const handleError = (errorRes: any) => {
@@ -47,7 +52,8 @@ export class AuthEffects {
   constructor(
     private actions$: Actions,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
   authLogin = createEffect(() =>
     this.actions$.pipe(
@@ -64,32 +70,82 @@ export class AuthEffects {
             }
           )
           .pipe(
+            tap((resData) => {
+              this.authService.setLogoutTimer(+resData.expiresIn * 1000);
+            }),
             map((resData) => {
-              const expirationDate = new Date(
-                new Date().getTime() + +resData.expiresIn * 1000
+              return handleAuthentication(
+                +resData.expiresIn,
+                resData.email,
+                resData.localId,
+                resData.idToken
               );
-              return new AuthActions.AuthenticateSuccess({
-                email: resData.email,
-                userId: resData.localId,
-                token: resData.idToken,
-                expirationDate: expirationDate,
-              });
             }),
             catchError((errorRes) => {
-              // console.log(errRes);
               return handleError(errorRes);
             })
           );
       })
     )
   );
+  autoLogin = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.AUTO_LOGIN),
+      map(() => {
+        const userData: {
+          email: string;
+          id: string;
+          _token: string;
+          _tokenExpirationDate: string;
+        } = JSON.parse(localStorage.getItem('userData'));
+        if (!userData) {
+          return { type: 'DUMMY' };
+        }
+        const loadedUser = new userModel(
+          userData.email,
+          userData.id,
+          userData._token,
+          new Date(userData._tokenExpirationDate)
+        );
+        if (loadedUser.token) {
+          const expirationDuration =
+            new Date(userData._tokenExpirationDate).getTime() -
+            new Date().getTime();
+          this.authService.setLogoutTimer(expirationDuration);
+          return new AuthActions.AuthenticateSuccess({
+            email: loadedUser.email,
+            token: loadedUser.token,
+            userId: loadedUser.id,
+            expirationDate: new Date(userData._tokenExpirationDate),
+            redirect: false,
+          });
+        }
+        return { type: 'DUMMY' };
+      })
+    )
+  );
 
-  authSuccess = createEffect(
+  authRedirect = createEffect(
     () =>
       this.actions$.pipe(
         ofType(AuthActions.AUTHENTICATE_SUCCESS),
+        tap((authSuccessAction: AuthActions.AuthenticateSuccess) => {
+          if (authSuccessAction.payload.redirect) {
+            this.router.navigate(['/']);
+          }
+        })
+      ),
+    { dispatch: false }
+  );
+
+  authLogout = createEffect(
+    () =>
+      this.actions$.pipe(
+        ofType(AuthActions.LOGOUT),
         tap(() => {
-          this.router.navigate(['/']);
+          this.authService.clearLogoutTimer();
+          localStorage.removeItem('userData');
+          this.router.navigate(['/auth']);
         })
       ),
     { dispatch: false }
@@ -110,6 +166,9 @@ export class AuthEffects {
             }
           )
           .pipe(
+            tap((resData) => {
+              this.authService.setLogoutTimer(+resData.expiresIn * 1000);
+            }),
             map((resData) => {
               return handleAuthentication(
                 +resData.expiresIn,

@@ -1,3 +1,4 @@
+import { environment } from './../environments/environment';
 import { AuthEffects } from './auth/store/auth.effects';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { CoreModule } from './core.module';
@@ -8,11 +9,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import * as fromApp from './store/app.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { RecipeEffects } from './recipes/store/recipe.effects';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, PageNotFoundComponent],
@@ -23,9 +26,11 @@ import * as fromApp from './store/app.reducer';
     HttpClientModule,
     ReactiveFormsModule,
     StoreModule.forRoot(fromApp.appReducer),
+    EffectsModule.forRoot([AuthEffects, RecipeEffects]),
     SharedModule,
+    StoreDevtoolsModule.instrument({ logOnly: environment.production }),
+    StoreRouterConnectingModule.forRoot(),
     CoreModule,
-    EffectsModule.forRoot([AuthEffects]),
   ],
   bootstrap: [AppComponent],
 })
