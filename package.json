@@ -23,6 +23,7 @@
     "@ngrx/store": "^14.2.0",
     "@ngrx/store-devtools": "^14.2.0",
     "bootstrap": "^3.4.1",
+    "ngx-image-zoom": "^1.0.1",
     "rxjs": "~7.5.0",
     "save": "^2.5.0",
     "tslib": "^2.3.0",

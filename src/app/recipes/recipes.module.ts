@@ -9,6 +9,7 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { RecipeStartComponent } from './recipe-start/recipe-start.component';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/sharded.module';
+import { NgxImageZoomModule } from 'ngx-image-zoom';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SharedModule } from '../shared/sharded.module';
     SharedModule,
     ReactiveFormsModule,
     RecipesRoutingModule,
+    NgxImageZoomModule,
   ],
   exports: [
     RecipeStartComponent,

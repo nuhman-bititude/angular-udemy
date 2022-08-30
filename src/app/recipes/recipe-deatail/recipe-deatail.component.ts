@@ -1,4 +1,4 @@
-import { map, pipe } from 'rxjs';
+import { map } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Recipe } from './../recipe.model';
 import { Component, OnInit } from '@angular/core';
@@ -15,6 +15,7 @@ import * as ShoppingListActions from '../../shopping-list/store/shopping-list.ac
 export class RecipeDeatailComponent implements OnInit {
   recipe: Recipe;
   id: number;
+  imageUrl: string;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -35,6 +36,7 @@ export class RecipeDeatailComponent implements OnInit {
         )
         .subscribe((recipe) => {
           this.recipe = recipe;
+          this.imageUrl = this.recipe.imagePath;
         });
     });
   }
@@ -49,5 +51,8 @@ export class RecipeDeatailComponent implements OnInit {
   onDeleteRecipe() {
     this.store.dispatch(new RecipeActions.DeleteRecipes(this.id));
     this.router.navigate(['../'], { relativeTo: this.route });
+  }
+  valueChanged(value: number) {
+    console.log(console.log(value));
   }
 }
