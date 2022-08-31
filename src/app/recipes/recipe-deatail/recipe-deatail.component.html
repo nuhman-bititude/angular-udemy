@@ -1,13 +1,28 @@
 <div class="row">
-    <div class="col-xs-12">
-        <!-- <img [src]="recipe.imagePath" alt="{{ recipe.name }}" class="img-responsive m-1" style="max-height: 250px;"> -->
-        <lib-ngx-image-zoom [thumbImage]='imageUrl' [fullImage]=imageUrl [magnification]="3" [minZoomRatio]="2"
-            [maxZoomRatio]="5" [enableScrollZoom]="true" [enableLens]="true" [lensWidth]="400" [lensHeight]="400"
-            altText="img-not-found">
-        </lib-ngx-image-zoom>
+    <div class="col-xs-12 image-preview ">
 
-        <input type="range" min="0" max="10" step="2" class="form-range" style="width: 200px; height: 50px;" #ref
-            (change)="valueChanged(ref.value)">
+        <!-- <div [ngStyle]="{'transform': 'scale(' + scaleRange + ')'}">
+
+            <img [src]="recipe.imagePath" alt="{{ recipe.name }}" class="img-responsive m-1"
+                style="max-height: 400px;max-width: 400px">
+        </div> -->
+
+
+        <div class="image-preview ">
+            <div [ngStyle]="{'transform': 'scale(' + scaleRange + ')'}">
+
+                <!-- <lib-ngx-image-zoom class="img-responsive m-1" style="max-height: 250px;" [thumbImage]='imageUrl'
+                    [fullImage]=imageUrl [magnification]="2" [minZoomRatio]="2" [maxZoomRatio]="5"
+                    [enableScrollZoom]="true" [lensWidth]="400" [lensHeight]="400" altText="img-not-found">
+                </lib-ngx-image-zoom> -->
+
+
+
+            </div>
+        </div>
+
+
+
     </div>
 </div>
 <div class="row">
@@ -40,5 +55,10 @@
             <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients">{{ingredient.name}}
                 ({{ingredient.amount}})</li>
         </ul>
+    </div>
+    <div class="">
+
+        <input type="range" min="1" max="10" step="1" value="1" class="form-range" style="width: 200px; height: 50px;"
+            #ref (change)="valueChanged(ref.value)">
     </div>
 </div>

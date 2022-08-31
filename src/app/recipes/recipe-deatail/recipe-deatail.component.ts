@@ -16,6 +16,7 @@ export class RecipeDeatailComponent implements OnInit {
   recipe: Recipe;
   id: number;
   imageUrl: string;
+  scaleRange: number;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -25,6 +26,7 @@ export class RecipeDeatailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
+      this.scaleRange = 1;
       this.store
         .select('recipe')
         .pipe(
@@ -53,6 +55,12 @@ export class RecipeDeatailComponent implements OnInit {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
   valueChanged(value: number) {
-    console.log(console.log(value));
+    // this.scaleRange = value ? 1 : value;
+    if (value === 1) {
+      this.scaleRange = 1;
+    } else {
+      this.scaleRange = value;
+    }
+    console.log(this.scaleRange);
   }
 }
