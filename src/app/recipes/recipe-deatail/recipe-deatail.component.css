@@ -1,3 +1,10 @@
 .image-preview {
   overflow: hidden;
 }
+::ng-deep .ngxImageZoomContainer > img {
+  max-height: 400px;
+  max-width: 400px;
+}
+::ng-deep .ngxImageZoomContainer > img.active {
+  display: block;
+}

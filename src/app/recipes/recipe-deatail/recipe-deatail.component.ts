@@ -55,7 +55,6 @@ export class RecipeDeatailComponent implements OnInit {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
   valueChanged(value: number) {
-    // this.scaleRange = value ? 1 : value;
     if (value === 1) {
       this.scaleRange = 1;
     } else {
