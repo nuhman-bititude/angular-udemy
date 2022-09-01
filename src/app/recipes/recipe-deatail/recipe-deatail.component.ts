@@ -17,6 +17,7 @@ export class RecipeDeatailComponent implements OnInit {
   id: number;
   imageUrl: string;
   scaleRange: number;
+  rotateAngle: number;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -27,6 +28,7 @@ export class RecipeDeatailComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.id = +params['id'];
       this.scaleRange = 1;
+      this.rotateAngle = 0;
       this.store
         .select('recipe')
         .pipe(
@@ -60,6 +62,24 @@ export class RecipeDeatailComponent implements OnInit {
     } else {
       this.scaleRange = value;
     }
-    console.log(this.scaleRange);
+  }
+
+  onDecrease() {
+    if (this.scaleRange <= 1) {
+      this.scaleRange = 1;
+    } else {
+      this.scaleRange = this.scaleRange - 1;
+    }
+  }
+  onIncrease() {
+    if (this.scaleRange >= 10) {
+      this.scaleRange = 10;
+    } else {
+      this.scaleRange = this.scaleRange + 1;
+    }
+  }
+  onRotate() {
+    this.scaleRange = 1;
+    this.rotateAngle = this.rotateAngle + 90;
   }
 }

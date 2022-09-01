@@ -1,10 +1,35 @@
 .image-preview {
+  max-width: 302px;
+  max-height: 302px;
   overflow: hidden;
 }
 ::ng-deep .ngxImageZoomContainer > img {
-  max-height: 400px;
-  max-width: 400px;
+  max-height: 302px;
+  max-width: 302px;
 }
-::ng-deep .ngxImageZoomContainer > img.active {
-  display: block;
+::ng-deep .ngxImageZoomThumbnail > img {
+  max-height: 302px;
+  max-width: 302px;
+  overflow: hidden;
+}
+.zoom-controls {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.zoom-control {
+  cursor: pointer;
+  display: inline-flex;
+  margin: 10px;
+  font-size: 20px;
+  color: #000;
+}
+.rotate-button {
+  border: 2px solid #000;
+}
+
+.rotate-button-icon {
+  cursor: pointer;
 }
