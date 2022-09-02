@@ -11,11 +11,11 @@
         <div class="image-preview">
             <div [ngStyle]="{'transform':'rotate(' + rotateAngle +  'deg)'}">
                 <div [ngStyle]="{'transform': 'scale(' + scaleRange +  ')'}">
-                    <div>
+                    <div #val (mousewheel)="scroll(val)">
 
                         <lib-ngx-image-zoom class="img-responsive m-1" style="max-height: 300px; max-width: 300px;"
-                            [thumbImage]='imageUrl' [fullImage]=imageUrl [maxZoomRatio]="10" [enableScrollZoom]="true"
-                            altText="img-not-found">
+                            [thumbImage]='imageUrl' [fullImage]=imageUrl maxZoomRatio="10" magnification="1"
+                            enableScrollZoom="true" altText="img-not-found">
                         </lib-ngx-image-zoom>
 
                     </div>

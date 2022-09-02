@@ -1,7 +1,7 @@
 import { map } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Recipe } from './../recipe.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import * as RecipeActions from '../store/recipe.action';
 import * as fromApp from '../../store/app.reducer';
@@ -81,5 +81,9 @@ export class RecipeDeatailComponent implements OnInit {
   onRotate() {
     this.scaleRange = 1;
     this.rotateAngle = this.rotateAngle + 90;
+  }
+
+  scroll(event) {
+    console.log(event);
   }
 }
