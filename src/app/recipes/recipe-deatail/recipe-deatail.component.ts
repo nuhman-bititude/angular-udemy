@@ -18,6 +18,9 @@ export class RecipeDeatailComponent implements OnInit {
   imageUrl: string;
   scaleRange: number;
   rotateAngle: number;
+  xValue: number;
+  yValue: number;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -83,7 +86,11 @@ export class RecipeDeatailComponent implements OnInit {
     this.rotateAngle = this.rotateAngle + 90;
   }
 
-  scroll(event) {
-    console.log(event);
+  scroll(magnification: number) {
+    this.scaleRange = magnification;
+  }
+  mouseMove(event) {
+    this.xValue = event.x;
+    this.yValue = event.y;
   }
 }
