@@ -1,20 +1,19 @@
 <div class="row">
-    <div class="col-xs-12 image-preview ">
+    <div class="col-xs-12 ">
 
         <!-- <div [ngStyle]="{'transform': 'scale(' + scaleRange + ')'}">
-
             <img [src]="recipe.imagePath" alt="{{ recipe.name }}" class="img-responsive m-1"
                 style="max-height: 400px;max-width: 400px">
         </div> -->
 
-
+        <p class="lead">click & scroll the image to zoom</p>
         <div class="image-preview">
             <div [ngStyle]="{'transform':'rotate(' + rotateAngle +  'deg)'}">
                 <div
                     [ngStyle]="{'transform': 'scale(' + scaleRange +  ')','transform-origin': xValue + 'px ' + yValue + 'px'}">
                     <div>
                         <lib-ngx-image-zoom (zoomScroll)="scroll($event)" (zoomPosition)="mouseMove($event)"
-                            zoomMode="toggle-click" [thumbImage]='imageUrl' [fullImage]=imageUrl maxZoomRatio="8"
+                            zoomMode="toggle-click" [thumbImage]='imageUrl' [fullImage]=imageUrl maxZoomRatio="10"
                             [scrollStepSize]=".1" magnification="1" enableScrollZoom="true" altText="img-not-found">
                         </lib-ngx-image-zoom>
                     </div>
@@ -23,11 +22,11 @@
         </div>
     </div>
     <div class="zoom-controls">
-        <p class="lead">click the image to zoom</p>
-        <div class="zoom-control" (click)="onDecrease()">-</div>
-        <input type="range" min="1" max="8" step=".5" value={{scaleRange}} class="form-range"
+
+        <div class="zoom-control" (click)="onDecrease()"> - </div>
+        <input type="range" min="1" max="10" step=".1" value={{scaleRange}} class="form-range"
             style="width: 200px; height: 50px;" #ref (change)="valueChanged(ref.value)">
-        <div class="zoom-control" (click)="onIncrease()">+</div>
+        <div class="zoom-control" (click)="onIncrease()"> + </div>
         <div class="rotate-button" (click)="onRotate()">
             <div class="rotate-button-icon">
                 <img src="https://img.icons8.com/material-sharp/24/000000/rotate-left.png" />

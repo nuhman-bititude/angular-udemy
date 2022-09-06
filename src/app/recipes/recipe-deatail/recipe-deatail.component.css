@@ -12,6 +12,7 @@
   max-width: 302px;
   overflow: hidden;
 }
+
 .zoom-controls {
   display: inline-flex;
   justify-content: space-between;
@@ -32,4 +33,9 @@
 
 .rotate-button-icon {
   cursor: pointer;
+}
+
+/* align nav links to right */
+.navbar-nav {
+  margin-left: auto;
 }
